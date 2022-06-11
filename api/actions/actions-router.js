@@ -26,11 +26,23 @@ router.get('/actions/:id', (req, res, next) => {
         
         res.json(result);
     });
-    
-    // console.log(req.action)
-    // // res.json(req.action)
   });
-  
+ 
+     router.delete('/actions/:id', (req, res, next) => {
+      Actions.remove(req.params.id)
+      .then(result => {
+          if(result == null) {
+              res.status(404).json({ message: 'action not found!'});
+              return;
+          }
+          res.json(result);
+      });
+    });
+
+    
+    module.exports = router;
+
+    
 
 // router.delete('/:id', validateUserId, async (req, res) => {
 //     try {
@@ -41,12 +53,6 @@ router.get('/actions/:id', (req, res, next) => {
 //       next(err)
 //     }
 //   });
-    
-    module.exports = router;
-
-    
-
-
 
 
 
