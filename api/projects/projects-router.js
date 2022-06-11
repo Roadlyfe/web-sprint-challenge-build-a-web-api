@@ -16,15 +16,27 @@ router.get('/projects', (req, res, next) => {
     })
     .catch(next)
 });
-    
-router.delete('/:id', async (req, res) => {
-    try {
-      await projects.remove(req.params.id)
-      res.json(req.action)
-    }
-    catch (err) {
-      next(err)
-    }
+
+router.get('/projects/:id', (req, res, next) => {
+  Projects.get(req.params.id)
+  .then(result => {
+      if(result == null) {
+          res.status(404).json({ message: 'cannot find project!' });
+          return;
+      }
+      
+      res.json(result);
+    });
   });
+    
+// router.delete('/:id', async (req, res, next) => {
+//     try {
+//       await projects.remove(req.params.id)
+//       res.json(req.action)
+//     }
+//     catch (err) {
+//       next(err)
+//     }
+//   });
     
     module.exports = router;

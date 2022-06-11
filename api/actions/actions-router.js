@@ -16,10 +16,20 @@ router.get('/actions',  (req, res, next) => {
     .catch(next)
 });
 
-// router.get('/actions/:id', validateUserId, (req, res) => {
-//     console.log(req.action)
-//     res.json(req.action)
-//   });
+router.get('/actions/:id', (req, res, next) => {
+    Actions.get(req.params.id)
+    .then(result => {
+        if(result == null) {
+            res.status(404).json({ message: 'action not found!' });
+            return;
+        }
+        
+        res.json(result);
+    });
+    
+    // console.log(req.action)
+    // // res.json(req.action)
+  });
   
 
 // router.delete('/:id', validateUserId, async (req, res) => {
