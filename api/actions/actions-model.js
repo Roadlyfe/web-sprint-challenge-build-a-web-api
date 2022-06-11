@@ -44,5 +44,13 @@ function update(id, changes) {
 }
 
 function remove(id) {
-  return db('actions').where('id', id).del();
+  return db('actions')
+    .where('id', id)
+    .del();
 }
+
+// function remove(id) {
+//   return db('users')
+//     .where('id', id)
+//     .del();
+// }
