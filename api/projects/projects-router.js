@@ -28,15 +28,43 @@ router.get('/projects/:id', (req, res, next) => {
       res.json(result);
     });
   });
-    
-// router.delete('/:id', async (req, res, next) => {
-//     try {
-//       await projects.remove(req.params.id)
-//       res.json(req.action)
-//     }
-//     catch (err) {
-//       next(err)
-//     }
-//   });
+  
+  router.post('/api/projects', (req, res) => { //this needs a project_id which I don't really understand
+    Projects.insert(req.body) //also maybe need a const newAction  = ?
+        .then(result => {
+            res.status(201).json(result);
+     })
+        .catch(result => {
+            res.status(400).json({ message: 'required field missing' });
+        });
+});
+
+
+
+router.put('/api/actions/:id', (req, res) => {
+    Projects.update(req.params.id, req.body).then(result => {
+        if (result == null) {
+            res.status(404).json({ message: 'project not found!' });
+            return;
+        }
+        res.json(result);
+    })
+        .catch(result => {
+            res.status(400).json({ message: 'required field missing' });
+        });
+});
+
+  router.delete('/projects/:id', (req, res, next) => {
+    Projects.remove(req.params.id)
+    .then(result => {
+        if(result == null) {
+            res.status(404).json({ message: 'action not found!'});
+            return;
+        }
+        res.json(result);
+    });
+  });
+
+
     
     module.exports = router;

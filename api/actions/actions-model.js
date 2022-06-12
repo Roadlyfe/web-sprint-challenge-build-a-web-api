@@ -49,8 +49,3 @@ function remove(id) {
     .del();
 }
 
-// function remove(id) {
-//   return db('users')
-//     .where('id', id)
-//     .del();
-// }
