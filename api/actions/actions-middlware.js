@@ -15,20 +15,20 @@ async function validateUserId(req, res, next) {
   }
   }
  
-  function validateUser(req, res, next) {
+  function validateAction(req, res, next) {
     // DO YOUR MAGIC
-    const { name } = req.body
-    if(!name || !name.trim()) {
+    const { action } = req.body
+    if(!action || !action.trim()) {
       res.status(400).json({ message: "missing required name field" })
     } else {
-      req.name = name.trim()
+      req.action = action.trim()
     next();
     }
   }
 
 module.exports = {
     validateUserId,
-    validateUser,
+    validateAction,
 }
 
 

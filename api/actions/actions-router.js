@@ -27,7 +27,9 @@ router.get('/actions/:id', (req, res, next) => {
         });
 });
 
-router.post('/api/actions', (req, res) => { //this needs a project_id which I don't really understand
+
+
+router.post('/actions', (req, res) => { //this needs a project_id which I don't really understand
     Actions.insert(req.body) //also maybe need a const newAction  = ?
         .then(result => {
             res.status(201).json(result);
