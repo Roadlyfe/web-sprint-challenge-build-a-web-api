@@ -29,6 +29,18 @@ router.get('/projects/:id', (req, res, next) => {
     });
   });
   
+  router.get('/projects/:id/actions', (req, res, next) => {
+    Projects.getProjectActions(req.params.id)
+    .then(result => {
+        if(result == null) {
+            res.status(404).json({ message: 'cannot find project!' });
+            return;
+        }
+        
+        res.json(result);
+      });
+    });
+
   router.post('/api/projects', (req, res) => { //this needs a project_id which I don't really understand
     Projects.insert(req.body) //also maybe need a const newAction  = ?
         .then(result => {
