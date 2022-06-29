@@ -1,17 +1,19 @@
 const express = require('express');
-const morgan = require('morgan');
-const {  } = require('./actions/actions-middlware');
+const server = express();
+//const morgan = require('morgan');
+//const {  } = require('./actions/actions-middlware');
+server.use(express.json());
 const actionsRouter = require('./actions/actions-router')
 const projectsRouter = require('./projects/projects-router')
-const server = express();
 
 
-server.use(express.json());
 
 
-server.use(morgan('dev'));
-server.use('/api', actionsRouter);
-server.use('/api', projectsRouter)
+
+
+//server.use(morgan('dev'));
+server.use('/api/actions', actionsRouter);
+server.use('/api/projects', projectsRouter)
 
  server.get('/', (req, res) => {
      res.status(200).json({

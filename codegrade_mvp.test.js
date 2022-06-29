@@ -110,7 +110,7 @@ describe('server.js', () => {
         await request(server).put('/api/projects/1').send(changes)
         project = await Project.get(1)
         expect(project.name).toBe('Gaga project')
-      }, 750)
+      }, 1500)
       test('[10] responds with a 400 if the request body is missing name, description or completed', async () => {
         let res = await request(server).put('/api/projects/1').send({ description: 'b', completed: false })
         expect(res.status).toBe(400)
