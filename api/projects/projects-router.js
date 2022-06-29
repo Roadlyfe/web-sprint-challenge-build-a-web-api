@@ -18,6 +18,14 @@ router.get('/:id', validateUserId, (req, res, next) => {
     res.json(req.project)
 });
 
+router.get('/:id/actions', async (req, res, next) => {
+    const project = await Projects.getProjectActions(req.params.id)
+    if(!project) {
+        return res.status(404).json([])
+    }
+    res.json(project)
+});
+
 //   router.get('/projects/:id/actions', (req, res, next) => {
 //     Projects.getProjectActions(req.params.id)
 //     .then(result => {
